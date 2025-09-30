@@ -34,14 +34,15 @@ def afficher_info(nom, age, ville):
     print(f"{nom}, {age} ans, vit à {ville}")
 
 # Unpacking d'arguments positionnels
-personne = ("Alice", 25, "Paris")
-afficher_info(*personne)  # Équivalent à afficher_info("Alice", 25, "Paris")
+personne = ("Patrick", 70, "Ons en Bray")
+afficher_info(*personne)  # Équivalent à afficher_info("Patrick", 70, "Ons en Bray")
 
 # Unpacking d'arguments nommés
 def creer_profil(nom, age, ville="Non spécifiée", metier="Non spécifié"):
     return f"Profil: {nom}, {age} ans, {ville}, {metier}"
 
 info = {"nom": "Bob", "age": 30, "ville": "Lyon", "metier": "Développeur"}
+# on déballe en arguments nommés
 profil = creer_profil(**info)  # Unpacking du dictionnaire
 print(profil)
 
@@ -63,20 +64,6 @@ print(f"Config: {config}")
 ma_config = {"debug": True, "key": "ma_cle", "allowed_hosts": ["localhost"]}
 config = config_django(**ma_config)
 print(f"Config via dict: {config}")
-
-
-def config_django_bis(debug=False, key="", allowed_hosts=None):
-    if allowed_hosts is None:
-        allowed_hosts = []
-    return {
-        "debug": debug,
-        "key": key,
-        "allowed_hosts": allowed_hosts
-    }
-
-config = {"debug": False, "key": "ma_cle_bis", "allowed_hosts": ["localhost"]}
-config_bis = config_django_bis(**config)
-print(f"Config bis: {config_bis}")
 
 # Combinaison des deux
 def combiner(obligatoire, *args, **kwargs):
