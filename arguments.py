@@ -30,3 +30,28 @@ foo_complet(
 # On peut nommer les arguments positionnels mais après plus de positionnels possibles
 # Tout garder en positionnel jusque *args
 # Ou si on nomme tout avant *args, plus de positionnels possibles
+
+
+# Exemple 1: utiliser un astérisque seul (*) comme séparateur
+def exemple_separateur(a, b, *, verbose=False, mode="standard"):
+    """
+    Ici le seul '*' force 'verbose' et 'mode' à être keyword-only.
+    On ne peut pas les fournir positionnellement.
+    """
+    print(f"a={a}, b={b}, verbose={verbose}, mode={mode}")
+
+# Appels valides :
+exemple_separateur(1, 2, verbose=True, mode="rapide")
+# Appel invalide (provoque TypeError) :
+# exemple_separateur(1, 2, True, "rapide")  # <-- interdit
+
+
+# Exemple 2: forcer que tous les paramètres soient keyword-only (aucun positionnel)
+def config(*, timeout=30, retries=3):
+    """Tous les paramètres doivent être passés par nom."""
+    print(f"timeout={timeout}, retries={retries}")
+
+# Appel valide :
+config(timeout=10, retries=5)
+# Appel invalide :
+# config(10, 5)  # <-- TypeError
